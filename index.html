@@ -393,34 +393,24 @@ function saveData() {
 
 function initData() {
   const wasLoaded = loadData();
+  const fresh = CATALOG_15.map((d, i) => ({
+    id: i + 1, name: d.name, style: d.style, price: d.price,
+    qty: d.qty, weight: d.weight, sellPrice: null,
+    note: d.note, link: d.link, image: d.image || null
+  }));
   if (!wasLoaded) {
-    items = CATALOG_15.map((d, i) => ({
-      id: i + 1,
-      name: d.name,
-      style: d.style,
-      price: d.price,
-      qty: d.qty,
-      weight: d.weight,
-      sellPrice: null,
-      note: d.note,
-      link: d.link,
-      image: d.image || null
-    }));
+    items = fresh;
     nextId = items.length + 1;
     saveData();
   } else {
-    // Merge images from source catalog into saved data (for upgrade path)
-    let merged = false;
-    items.forEach(item => {
-      if (!item.image) {
-        const src = CATALOG_15.find(d => d.name === item.name && d.image);
-        if (src && src.image) {
-          item.image = src.image;
-          merged = true;
-        }
+    items = items.map((saved, i) => {
+      if (i < fresh.length) {
+        return { ...fresh[i], sellPrice: saved.sellPrice, qty: saved.qty, weight: saved.weight, note: saved.note || fresh[i].note, link: saved.link || fresh[i].link };
       }
+      return saved;
     });
-    if (merged) saveData();
+    nextId = items.length ? Math.max(...items.map(i => i.id)) + 1 : 1;
+    saveData();
   }
 }
 
