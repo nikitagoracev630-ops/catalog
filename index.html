@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>РўРѕРІР°СЂРєР° вЂ” РљР°С‚Р°Р»РѕРі Рё С„РёРЅР°РЅСЃС‹</title>
+<title>Товарка — Каталог и финансы</title>
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body {
@@ -167,78 +167,78 @@
 </head>
 <body>
 
-<h1>рџ“¦ РўРѕРІР°СЂРєР° вЂ” РєР°С‚Р°Р»РѕРі Рё С„РёРЅР°РЅСЃС‹</h1>
-<div class="subtitle">Р—Р°РіСЂСѓР·РєР° РёР· catalog_10 вЂў Р Р°СЃС‡С‘С‚ СЃРµР±РµСЃС‚РѕРёРјРѕСЃС‚Рё, РґРѕСЃС‚Р°РІРєРё, РІС‹СЂСѓС‡РєРё Рё РїСЂРёР±С‹Р»Рё вЂў Р’РµСЃ РїРѕ РєР°С‚РµРіРѕСЂРёСЏРј</div>
+<h1>📦 Товарка — каталог и финансы</h1>
+<div class="subtitle">Загрузка из catalog_10 • Расчёт себестоимости, доставки, выручки и прибыли • Вес по категориям</div>
 
 <div class="settings" id="settingsPanel">
   <div class="s-group">
-    <label>РљСѓСЂСЃ CNY в†’ в‚ё</label>
+    <label>Курс CNY → ₸</label>
     <input type="number" id="cnyRate" value="71.5" step="0.1">
   </div>
   <div class="s-group">
-    <label>РљСѓСЂСЃ USD в†’ в‚ё</label>
+    <label>Курс USD → ₸</label>
     <input type="number" id="usdRate" value="481" step="1">
   </div>
   <div class="s-group">
-    <label>РќР°С†РµРЅРєР° (%)</label>
+    <label>Наценка (%)</label>
     <input type="number" id="defMarkup" value="100" step="5">
   </div>
   <div class="s-group">
-    <label>РљР°СЂРіРѕ ($/РєРі)</label>
+    <label>Карго ($/кг)</label>
     <input type="number" id="cargoRate" value="3.5" step="0.1">
   </div>
   <div class="s-group">
-    <label>РљРѕРјРёСЃСЃРёСЏ (ВҐ)</label>
+    <label>Комиссия (¥)</label>
     <input type="number" id="platformComm" value="25" step="1">
   </div>
   <div class="s-group">
-    <label>Р’РµСЃ РїРѕ СѓРјРѕР»С‡Р°РЅРёСЋ (РєРі)</label>
+    <label>Вес по умолчанию (кг)</label>
     <input type="number" id="defWeight" value="0.4" step="0.05">
   </div>
   <div class="s-group">
     <label>&nbsp;</label>
-    <button class="btn-ghost" onclick="resetData()">РЎР±СЂРѕСЃРёС‚СЊ РґР°РЅРЅС‹Рµ</button>
+    <button class="btn-ghost" onclick="resetData()">Сбросить данные</button>
   </div>
 </div>
 
 <div class="summary" id="summaryCards">
   <div class="card">
-    <div class="card-label">РўРѕРІР°СЂРѕРІ (РІСЃРµРіРѕ С€С‚)</div>
+    <div class="card-label">Товаров (всего шт)</div>
     <div class="card-value" id="totalItems">0</div>
-    <div class="card-sub">РµРґРёРЅРёС† РІ РєР°С‚Р°Р»РѕРіРµ</div>
+    <div class="card-sub">единиц в каталоге</div>
   </div>
   <div class="card blue">
-    <div class="card-label">Р—Р°РєСѓРїРєР° (CNY)</div>
-    <div class="card-value" id="totalCNY">ВҐ0</div>
-    <div class="card-sub" id="totalCNYtg">0 в‚ё</div>
+    <div class="card-label">Закупка (CNY)</div>
+    <div class="card-value" id="totalCNY">¥0</div>
+    <div class="card-sub" id="totalCNYtg">0 ₸</div>
   </div>
   <div class="card purple">
-    <div class="card-label">РЎРµР±РµСЃС‚РѕРёРјРѕСЃС‚СЊ</div>
+    <div class="card-label">Себестоимость</div>
     <div class="card-value" id="totalCost">0</div>
-    <div class="card-sub">С‚РѕРІР°СЂ + РґРѕСЃС‚Р°РІРєР° + РєРѕРјРёСЃСЃРёСЏ</div>
+    <div class="card-sub">товар + доставка + комиссия</div>
   </div>
   <div class="card">
-    <div class="card-label">Р’С‹СЂСѓС‡РєР°</div>
+    <div class="card-label">Выручка</div>
     <div class="card-value" id="totalRevenue">0</div>
-    <div class="card-sub">в‚ё (С†РµРЅР° РїСЂРѕРґР°Р¶Рё Г— РєРѕР»-РІРѕ)</div>
+    <div class="card-sub">₸ (цена продажи × кол-во)</div>
   </div>
   <div class="card green" id="profitCard">
-    <div class="card-label">РџСЂРёР±С‹Р»СЊ</div>
+    <div class="card-label">Прибыль</div>
     <div class="card-value" id="totalProfit">0</div>
-    <div class="card-sub" id="profitMargin">0% РјР°СЂР¶РёРЅР°Р»СЊРЅРѕСЃС‚СЊ</div>
+    <div class="card-sub" id="profitMargin">0% маржинальность</div>
   </div>
   <div class="card">
-    <div class="card-label">Р”РѕСЃС‚Р°РІРєР° (РІСЃРµРіРѕ)</div>
+    <div class="card-label">Доставка (всего)</div>
     <div class="card-value" id="totalDelivery">0</div>
-    <div class="card-sub" id="totalWeight">0 РєРі</div>
+    <div class="card-sub" id="totalWeight">0 кг</div>
   </div>
 </div>
 
 <div class="toolbar">
-  <button class="btn-primary" onclick="openAddModal()">+ Р”РѕР±Р°РІРёС‚СЊ С‚РѕРІР°СЂ</button>
-  <button class="btn-green" onclick="document.getElementById('importFile').click()">рџ“Ґ РРјРїРѕСЂС‚ РёР· DOCX (catalog_10)</button>
+  <button class="btn-primary" onclick="openAddModal()">+ Добавить товар</button>
+  <button class="btn-green" onclick="document.getElementById('importFile').click()">📥 Импорт из DOCX (catalog_10)</button>
   <input type="file" id="importFile" accept=".docx,.csv,.xlsx,.json" style="display:none" onchange="handleImport(event)">
-  <button class="btn-ghost" onclick="exportCSV()">рџ“¤ Р­РєСЃРїРѕСЂС‚ CSV</button>
+  <button class="btn-ghost" onclick="exportCSV()">📤 Экспорт CSV</button>
   <span style="color:#555;font-size:12px;align-self:center" id="statusMsg"></span>
 </div>
 
@@ -248,19 +248,19 @@
   <table id="catalogTable">
     <thead>
       <tr>
-        <th>в„–</th>
-        <th style="width:120px">Р¤РѕС‚Рѕ</th>
-        <th>РќР°Р·РІР°РЅРёРµ</th>
-        <th>РљР°С‚РµРіРѕСЂРёСЏ</th>
-        <th>Р¦РµРЅР° ВҐ</th>
-        <th>РљРѕР»-РІРѕ</th>
-        <th>Р’РµСЃ (РєРі)</th>
-        <th>РЎРµР±РµСЃС‚. (в‚ё)</th>
-        <th>Р¦РµРЅР° РїСЂРѕРґР°Р¶Рё (в‚ё)</th>
-        <th>РџСЂРёР±С‹Р»СЊ (в‚ё)</th>
-        <th>РњР°СЂР¶Р°</th>
-        <th>РџСЂРёРјРµС‡Р°РЅРёРµ</th>
-        <th>РЎСЃС‹Р»РєР°</th>
+        <th>№</th>
+        <th style="width:120px">Фото</th>
+        <th>Название</th>
+        <th>Категория</th>
+        <th>Цена ¥</th>
+        <th>Кол-во</th>
+        <th>Вес (кг)</th>
+        <th>Себест. (₸)</th>
+        <th>Цена продажи (₸)</th>
+        <th>Прибыль (₸)</th>
+        <th>Маржа</th>
+        <th>Примечание</th>
+        <th>Ссылка</th>
         <th></th>
       </tr>
     </thead>
@@ -270,42 +270,42 @@
 
 <div class="modal-overlay" id="modalOverlay">
   <div class="modal">
-    <h3>+ Р”РѕР±Р°РІРёС‚СЊ С‚РѕРІР°СЂ</h3>
+    <h3>+ Добавить товар</h3>
     <div class="m-field">
-      <label>РќР°Р·РІР°РЅРёРµ *</label>
-      <input type="text" id="newName" placeholder="РќР°РїСЂРёРјРµСЂ: РҐСѓРґРё СЃРµСЂРѕРµ СЃ РїСЂРёРЅС‚РѕРј">
+      <label>Название *</label>
+      <input type="text" id="newName" placeholder="Например: Худи серое с принтом">
     </div>
     <div class="m-field">
-      <label>РљР°С‚РµРіРѕСЂРёСЏ / РЎС‚РёР»СЊ</label>
+      <label>Категория / Стиль</label>
       <input type="text" id="newStyle" placeholder="Streetwear / Y2K / Grunge / Casual">
     </div>
     <div class="m-field">
-      <label>Р¦РµРЅР° РІ СЋР°РЅСЏС… (ВҐ) *</label>
+      <label>Цена в юанях (¥) *</label>
       <input type="number" id="newPrice" placeholder="0" step="0.01">
     </div>
     <div class="m-field">
-      <label>РљРѕР»РёС‡РµСЃС‚РІРѕ</label>
+      <label>Количество</label>
       <input type="number" id="newQty" placeholder="1" value="1" min="1">
     </div>
     <div class="m-field">
-      <label>Р’РµСЃ (РєРі) вЂ” РµСЃР»Рё РѕСЃС‚Р°РІРёС‚СЊ РїСѓСЃС‚С‹Рј, РїРѕРґСЃС‚Р°РІРёС‚СЃСЏ РїРѕ РєР°С‚РµРіРѕСЂРёРё</label>
+      <label>Вес (кг) — если оставить пустым, подставится по категории</label>
       <input type="number" id="newWeight" placeholder="0.4" step="0.05">
     </div>
     <div class="m-field">
-      <label>Р¦РµРЅР° РїСЂРѕРґР°Р¶Рё (в‚ё) вЂ” РµСЃР»Рё РїСѓСЃС‚Рѕ, СЂР°СЃСЃС‡РёС‚Р°РµС‚СЃСЏ РїРѕ РЅР°С†РµРЅРєРµ</label>
-      <input type="number" id="newSellPrice" placeholder="РђРІС‚РѕСЂР°СЃС‡С‘С‚" step="100">
+      <label>Цена продажи (₸) — если пусто, рассчитается по наценке</label>
+      <input type="number" id="newSellPrice" placeholder="Авторасчёт" step="100">
     </div>
     <div class="m-field">
-      <label>РџСЂРёРјРµС‡Р°РЅРёРµ / РЎРѕСЃС‚Р°РІ</label>
-      <input type="text" id="newNote" placeholder="70% С…Р»РѕРїРѕРє, 30% РїРѕР»РёСЌСЃС‚РµСЂ">
+      <label>Примечание / Состав</label>
+      <input type="text" id="newNote" placeholder="70% хлопок, 30% полиэстер">
     </div>
     <div class="m-field">
-      <label>РЎСЃС‹Р»РєР° РЅР° С‚РѕРІР°СЂ</label>
+      <label>Ссылка на товар</label>
       <input type="text" id="newLink" placeholder="https://...">
     </div>
     <div class="m-actions">
-      <button class="btn-ghost" onclick="closeModal()">РћС‚РјРµРЅР°</button>
-      <button class="btn-primary" onclick="addItem()">Р”РѕР±Р°РІРёС‚СЊ</button>
+      <button class="btn-ghost" onclick="closeModal()">Отмена</button>
+      <button class="btn-primary" onclick="addItem()">Добавить</button>
     </div>
   </div>
 </div>
@@ -313,42 +313,42 @@
 <div class="toast" id="toast"></div>
 
 <script>
-// ===================== Р”РђРќРќР«Р• РљРђРўРђР›РћР“Рђ =====================
+// ===================== ДАННЫЕ КАТАЛОГА =====================
 
 const CATALOG_15 = [
-  { name: "Р”Р¶РёРЅСЃС‹ y2k РѕРІРµСЂСЃР°Р№Р· СЃ РІС‹С€РёРІРєРѕР№", style: "Y2K", price: 50.0, qty: 1, note: "70% РїРѕР»РёСЌСЃС‚РµСЂ, 30% С…Р»РѕРїРѕРє", link: "https://mobile.yangkeduo.com/goods2.html?ps=QIn5GUtY2P", weight: null },
-  { name: "Р¤СѓС‚Р±РѕР»РєР° РѕРІРµСЂСЃР°Р№Р· СЃ С‡РµСЂРµРїРѕРј (Breaking Bad)", style: "Streetwear / Grunge", price: 16.9, qty: 1, note: "РҐР»РѕРїРѕРє, СѓРЅРёСЃРµРєСЃ", link: "https://mobile.yangkeduo.com/goods.html?ps=7dF6TViHNt", weight: null },
-  { name: "Р—РёРїРєР° С‚С‘РјРЅРѕ-СЃРёРЅСЏСЏ СЃ РЅР°С€РёРІРєР°РјРё", style: "Streetwear / Casual", price: 38.3, qty: 1, note: "РџРѕР»РёСЌСЃС‚РµСЂ, РїРѕР»СѓР·Р°РјРѕРє", link: "https://mobile.yangkeduo.com/goods.html?ps=tCUq9uOTTZ", weight: null },
-  { name: "РҐСѓРґРё СЃРµСЂРѕРµ СЃ РїСЂРёРЅС‚РѕРј", style: "Streetwear", price: 31.95, qty: 2, note: "80% С…Р»РѕРїРѕРє, СѓРЅРёСЃРµРєСЃ", link: "https://mobile.yangkeduo.com/goods2.html?ps=A2qgsTdOji", weight: null },
-  { name: "Р”Р¶РёРЅСЃС‹ С‚С‘РјРЅС‹Рµ С€РёСЂРѕРєРёРµ СЃ СЂРѕР·РѕРІС‹Рј РїСЂРёРЅС‚РѕРј", style: "Y2K / Grunge", price: 50.3, qty: 2, note: "90% С…Р»РѕРїРѕРє, СѓРЅРёСЃРµРєСЃ", link: "https://mobile.yangkeduo.com/goods2.html?ps=HfHJ0vU2yW", weight: null },
-  { name: "РҐСѓРґРё СЃ РїСЂРёРЅС‚РѕРј С„Р»Р°РіРѕРІ РЎРЁРђ Рё Р‘СЂРёС‚Р°РЅРёРё", style: "Streetwear / Grunge", price: 57.8, qty: 1, note: "РџРѕР»РёСЌСЃС‚РµСЂ, СѓРЅРёСЃРµРєСЃ", link: "https://mobile.yangkeduo.com/goods.html?ps=jYjrp45TXu", weight: null },
-  { name: "Р”Р¶РёРЅСЃС‹ y2k СЃ РїРѕР»РѕСЃРєР°РјРё (С‡С‘СЂРЅС‹Рµ + РіРѕР»СѓР±С‹Рµ)", style: "Y2K / Streetwear", price: 43.3, qty: 2, note: "100% С…Р»РѕРїРѕРє, 2 СЂР°СЃС†РІРµС‚РєРё", link: "https://mobile.yangkeduo.com/goods1.html?ps=Px8DcPUgLM", weight: null },
-  { name: "Р—РёРїРєР° С‡С‘СЂРЅР°СЏ СЃ РїСЂРёРЅС‚РѕРј JAPAN", style: "Streetwear / Japan", price: 64.0, qty: 1, note: "РњР°С‚РµСЂРёР°Р» СѓС‚РѕС‡РЅСЏРµС‚СЃСЏ", link: "https://mobile.yangkeduo.com/goods1.html?ps=oRrTcWrXsJ", weight: null },
-  { name: "Р¤СѓС‚Р±РѕР»РєР° ERD (С‡С‘СЂРЅР°СЏ + Р±РµР»Р°СЏ)", style: "Streetwear / Grunge", price: 29.9, qty: 2, note: "РҐР»РѕРїРѕРє, 2 СЂР°СЃС†РІРµС‚РєРё", link: "https://mobile.yangkeduo.com/goods.html?ps=iyVfoK8ZCI", weight: null },
-  { name: "Р¤СѓС‚Р±РѕР»РєР° C.P. Company (Р±РµР»Р°СЏ + С‡С‘СЂРЅР°СЏ)", style: "Streetwear / Casual", price: 12.0, qty: 2, note: "90% С…Р»РѕРїРѕРє, 2 СЂР°СЃС†РІРµС‚РєРё", link: "https://mobile.yangkeduo.com/goods.html?ps=tW0YB8BYlG", weight: null },
-  { name: "Р¤СѓС‚Р±РѕР»РєР° Stone Island СЃ РЅР°С€РёРІРєРѕР№", style: "Streetwear / Casual", price: 28.77, qty: 1, note: "РҐР»РѕРїРѕРє, СѓРЅРёСЃРµРєСЃ", link: "https://mobile.yangkeduo.com/goods1.html?ps=UsNb09qJvk", weight: null },
-  { name: "Р¤СѓС‚Р±РѕР»РєР° СЃ СЏРїРѕРЅСЃРєРёРј РїСЂРёРЅС‚РѕРј Рё С‡С‘СЂРЅС‹РјРё СЂСѓРєР°РІР°РјРё", style: "Streetwear / Japan", price: 22.1, qty: 1, note: "РҐР»РѕРїРѕРє, СѓРЅРёСЃРµРєСЃ", link: "https://mobile.yangkeduo.com/goods.html?ps=eaq7BOqi3C", weight: null },
-  { name: "Р¤СѓС‚Р±РѕР»РєР° Lain Р°РЅРёРјРµ (С‡С‘СЂРЅР°СЏ + Р±РµР»Р°СЏ)", style: "Y2K / Anime", price: 24.55, qty: 2, note: "РҐР»РѕРїРѕРє, 2 СЂР°СЃС†РІРµС‚РєРё", link: "https://mobile.yangkeduo.com/goods.html?ps=vQAZilL9zf", weight: null },
-  { name: "Р¤СѓС‚Р±РѕР»РєР° Essentials FOG (Р±РµР»Р°СЏ + С‡С‘СЂРЅР°СЏ)", style: "Streetwear / Casual", price: 36.8, qty: 2, note: "95% С…Р»РѕРїРѕРє, 2 СЂР°СЃС†РІРµС‚РєРё, СѓРЅРёСЃРµРєСЃ", link: "https://mobile.yangkeduo.com/goods.html?ps=N2197sWkBP", weight: null },
-  { name: "Р¤СѓС‚Р±РѕР»РєР° Porsche 911 GT3 RS", style: "Streetwear / Auto", price: 21.95, qty: 1, note: "95% С…Р»РѕРїРѕРє, СѓРЅРёСЃРµРєСЃ", link: "https://mobile.yangkeduo.com/goods.html?ps=oTk2qNITsw", weight: null },
-  { name: "Р›РѕРЅРіСЃР»РёРІ College 1964 (Р±РѕСЂРґРѕРІС‹Рµ СЂСѓРєР°РІР°)", style: "Streetwear / College", price: 24.8, qty: 1, note: "95% С…Р»РѕРїРѕРє, СѓРЅРёСЃРµРєСЃ", link: "https://mobile.yangkeduo.com/goods.html?ps=GOwgc5LjO8", weight: null }
+  { name: "Джинсы y2k оверсайз с вышивкой", style: "Y2K", price: 50.0, qty: 1, note: "70% полиэстер, 30% хлопок", link: "https://mobile.yangkeduo.com/goods2.html?ps=QIn5GUtY2P", weight: null, image: "img/img_0.jpg" },
+  { name: "Футболка оверсайз с черепом (Breaking Bad)", style: "Streetwear / Grunge", price: 16.9, qty: 1, note: "Хлопок, унисекс", link: "https://mobile.yangkeduo.com/goods.html?ps=7dF6TViHNt", weight: null, image: "img/img_1.jpg" },
+  { name: "Зипка тёмно-синяя с нашивками", style: "Streetwear / Casual", price: 38.3, qty: 1, note: "Полиэстер, полузамок", link: "https://mobile.yangkeduo.com/goods.html?ps=tCUq9uOTTZ", weight: null, image: "img/img_2.jpg" },
+  { name: "Худи серое с принтом", style: "Streetwear", price: 31.95, qty: 2, note: "80% хлопок, унисекс", link: "https://mobile.yangkeduo.com/goods2.html?ps=A2qgsTdOji", weight: null, image: "img/img_3.jpg" },
+  { name: "Джинсы тёмные широкие с розовым принтом", style: "Y2K / Grunge", price: 50.3, qty: 2, note: "90% хлопок, унисекс", link: "https://mobile.yangkeduo.com/goods2.html?ps=HfHJ0vU2yW", weight: null, image: "img/img_4.jpg" },
+  { name: "Худи с принтом флагов США и Британии", style: "Streetwear / Grunge", price: 57.8, qty: 1, note: "Полиэстер, унисекс", link: "https://mobile.yangkeduo.com/goods.html?ps=jYjrp45TXu", weight: null, image: "img/img_5.jpg" },
+  { name: "Джинсы y2k с полосками (чёрные + голубые)", style: "Y2K / Streetwear", price: 43.3, qty: 2, note: "100% хлопок, 2 расцветки", link: "https://mobile.yangkeduo.com/goods1.html?ps=Px8DcPUgLM", weight: null, image: "img/img_6.jpg" },
+  { name: "Зипка чёрная с принтом JAPAN", style: "Streetwear / Japan", price: 64.0, qty: 1, note: "Материал уточняется", link: "https://mobile.yangkeduo.com/goods1.html?ps=oRrTcWrXsJ", weight: null, image: "img/img_7.jpg" },
+  { name: "Футболка ERD (чёрная + белая)", style: "Streetwear / Grunge", price: 29.9, qty: 2, note: "Хлопок, 2 расцветки", link: "https://mobile.yangkeduo.com/goods.html?ps=iyVfoK8ZCI", weight: null, image: "img/img_8.jpg" },
+  { name: "Футболка C.P. Company (белая + чёрная)", style: "Streetwear / Casual", price: 12.0, qty: 2, note: "90% хлопок, 2 расцветки", link: "https://mobile.yangkeduo.com/goods.html?ps=tW0YB8BYlG", weight: null, image: "img/img_9.jpg" },
+  { name: "Футболка Stone Island с нашивкой", style: "Streetwear / Casual", price: 28.77, qty: 1, note: "Хлопок, унисекс", link: "https://mobile.yangkeduo.com/goods1.html?ps=UsNb09qJvk", weight: null, image: "img/img_10.jpg" },
+  { name: "Футболка с японским принтом и чёрными рукавами", style: "Streetwear / Japan", price: 22.1, qty: 1, note: "Хлопок, унисекс", link: "https://mobile.yangkeduo.com/goods.html?ps=eaq7BOqi3C", weight: null, image: "img/img_11.jpg" },
+  { name: "Футболка Lain аниме (чёрная + белая)", style: "Y2K / Anime", price: 24.55, qty: 2, note: "Хлопок, 2 расцветки", link: "https://mobile.yangkeduo.com/goods.html?ps=vQAZilL9zf", weight: null, image: "img/img_12.jpg" },
+  { name: "Футболка Essentials FOG (белая + чёрная)", style: "Streetwear / Casual", price: 36.8, qty: 2, note: "95% хлопок, 2 расцветки, унисекс", link: "https://mobile.yangkeduo.com/goods.html?ps=N2197sWkBP", weight: null, image: "img/img_13.jpg" },
+  { name: "Футболка Porsche 911 GT3 RS", style: "Streetwear / Auto", price: 21.95, qty: 1, note: "95% хлопок, унисекс", link: "https://mobile.yangkeduo.com/goods.html?ps=oTk2qNITsw", weight: null, image: "img/img_14.jpg" },
+  { name: "Лонгслив College 1964 (бордовые рукава)", style: "Streetwear / College", price: 24.8, qty: 1, note: "95% хлопок, унисекс", link: "https://mobile.yangkeduo.com/goods.html?ps=GOwgc5LjO8", weight: null, image: "img/img_15.jpg" }
 ];
 
 
-// ===================== Р’Р•РЎРђ РџРћ РљРђРўР•Р“РћР РРЇРњ =====================
+// ===================== ВЕСА ПО КАТЕГОРИЯМ =====================
 const CATEGORY_WEIGHTS = {
-  "С…СѓРґРё": 0.6, "hoodie": 0.6, "С‚РѕР»СЃС‚РѕРІРє": 0.5,
-  "С„СѓС‚Р±РѕР»Рє": 0.2, "t-shirt": 0.2, "РјР°Р№Рє": 0.15,
-  "РґР¶РёРЅСЃ": 0.55, "jeans": 0.55, "С€С‚Р°РЅС‹": 0.5, "pants": 0.5,
-  "С€РѕСЂС‚": 0.25, "shorts": 0.25,
-  "РєСѓСЂС‚Рє": 0.8, "jacket": 0.8, "Р·РёРїРє": 0.6, "РІРµС‚СЂРѕРІРє": 0.4,
-  "СЃРІРёС‚РµСЂ": 0.45, "СЃРІРёС‚С€РѕС‚": 0.45, "sweater": 0.45,
-  "С‚РѕР»СЃС‚РѕРІРєР°": 0.55,
-  "РѕР±СѓРІ": 1.0, "shoes": 1.0, "РєСЂРѕСЃСЃРѕРІРє": 0.9, "sneaker": 0.9,
-  "РєРµРїРє": 0.1, "cap": 0.1, "С€Р°РїРє": 0.1, "hat": 0.1,
-  "СЃСѓРјРє": 0.3, "bag": 0.3, "СЂСЋРєР·Р°Рє": 0.5, "backpack": 0.5,
-  "Р°РєСЃРµСЃСЃСѓР°СЂ": 0.15, "СЂРµРјРµРЅСЊ": 0.15, "belt": 0.15,
-  "РЅРѕСЃРє": 0.05, "socks": 0.05,
+  "худи": 0.6, "hoodie": 0.6, "толстовк": 0.5,
+  "футболк": 0.2, "t-shirt": 0.2, "майк": 0.15,
+  "джинс": 0.55, "jeans": 0.55, "штаны": 0.5, "pants": 0.5,
+  "шорт": 0.25, "shorts": 0.25,
+  "куртк": 0.8, "jacket": 0.8, "зипк": 0.6, "ветровк": 0.4,
+  "свитер": 0.45, "свитшот": 0.45, "sweater": 0.45,
+  "толстовка": 0.55,
+  "обув": 1.0, "shoes": 1.0, "кроссовк": 0.9, "sneaker": 0.9,
+  "кепк": 0.1, "cap": 0.1, "шапк": 0.1, "hat": 0.1,
+  "сумк": 0.3, "bag": 0.3, "рюкзак": 0.5, "backpack": 0.5,
+  "аксессуар": 0.15, "ремень": 0.15, "belt": 0.15,
+  "носк": 0.05, "socks": 0.05,
   "streetwear": 0.4, "y2k": 0.4, "grunge": 0.4,
   "japan": 0.4, "casual": 0.4
 };
@@ -361,7 +361,7 @@ function guessWeight(name, style) {
   return null;
 }
 
-// ===================== РЎРћРЎРўРћРЇРќРР• =====================
+// ===================== СОСТОЯНИЕ =====================
 let items = [];
 let nextId = 1;
 let activeFilter = "all";
@@ -424,7 +424,7 @@ function initData() {
   }
 }
 
-// ===================== Р РђРЎР§РЃРўР« =====================
+// ===================== РАСЧЁТЫ =====================
 function getSettings() {
   return {
     cny: parseFloat(document.getElementById('cnyRate').value) || 71.5,
@@ -451,7 +451,7 @@ function calcItem(item, s) {
   const deliveryTotal = deliveryUnit * item.qty;
   const commTotal = s.comm * s.cny;
 
-  // Р Р°СЃРїСЂРµРґРµР»СЏРµРј РєРѕРјРёСЃСЃРёСЋ РїСЂРѕРїРѕСЂС†РёРѕРЅР°Р»СЊРЅРѕ СЃРµР±РµСЃС‚РѕРёРјРѕСЃС‚Рё
+  // Распределяем комиссию пропорционально себестоимости
   const totalGoodsCost = items.reduce((a, b) => a + b.price * s.cny * b.qty, 0);
   const commShare = totalGoodsCost > 0 ? (costTotal / totalGoodsCost) * commTotal : 0;
 
@@ -463,14 +463,14 @@ function calcItem(item, s) {
   }
   const revenue = sellPrice * item.qty;
 
-  // РџСЂРёР±С‹Р»СЊ РЅР° С‚РѕРІР°СЂ вЂ” Р±РµР· СѓС‡С‘С‚Р° РґРѕСЃС‚Р°РІРєРё Рё РєРѕРјРёСЃСЃРёРё
+  // Прибыль на товар — без учёта доставки и комиссии
   const profit = revenue - costTotal;
   const margin = revenue > 0 ? (profit / revenue) * 100 : 0;
 
   return { costUnit, costTotal, deliveryUnit, deliveryTotal, commShare, fullCost: costTotal, sellPrice, recommendedPrice, revenue, profit, margin, weightEst: w.est, weightKg: w.kg };
 }
 
-// ===================== РћРўРћР‘Р РђР–Р•РќРР• =====================
+// ===================== ОТОБРАЖЕНИЕ =====================
 function render() {
   const s = getSettings();
   const tbody = document.getElementById('tableBody');
@@ -485,14 +485,14 @@ function render() {
     const c = calcItem(item, s);
     const tr = document.createElement('tr');
     const pClass = c.profit > 0 ? 'p-pos' : c.profit < 0 ? 'p-neg' : 'p-zero';
-    const weightLabel = c.weightEst ? `<span class="weight-est">в‰€${c.weightKg.toFixed(2)}</span>` : c.weightKg.toFixed(2);
+    const weightLabel = c.weightEst ? `<span class="weight-est">≈${c.weightKg.toFixed(2)}</span>` : c.weightKg.toFixed(2);
 
     tr.innerHTML = `
       <td style="color:#555;font-size:12px">${idx + 1}</td>
       <td class="td-img">
         ${item.image
           ? `<img class="thumb" src="${item.image}" alt="" onclick="document.getElementById('imgFile_${item.id}').click()">`
-          : `<div class="no-img" onclick="document.getElementById('imgFile_${item.id}').click()">рџ“·</div>`
+          : `<div class="no-img" onclick="document.getElementById('imgFile_${item.id}').click()">📷</div>`
         }
         <input type="file" accept="image/*" id="imgFile_${item.id}" style="display:none" onchange="handleImg(event,${item.id})">
       </td>
@@ -501,7 +501,7 @@ function render() {
       <td><input class="num-inp" type="number" value="${item.price}" step="0.01" onchange="upd(${item.id},'price',parseFloat(this.value))"></td>
       <td><input class="num-inp" type="number" value="${item.qty}" min="1" step="1" onchange="upd(${item.id},'qty',parseInt(this.value))"></td>
       <td style="white-space:nowrap">
-        <input class="num-inp" type="number" value="${item.weight != null && item.weight > 0 ? item.weight : ''}" step="0.05" style="width:60px" placeholder="Р°РІС‚Рѕ" onchange="upd(${item.id},'weight',this.value ? parseFloat(this.value) : null)">
+        <input class="num-inp" type="number" value="${item.weight != null && item.weight > 0 ? item.weight : ''}" step="0.05" style="width:60px" placeholder="авто" onchange="upd(${item.id},'weight',this.value ? parseFloat(this.value) : null)">
         ${weightLabel}
       </td>
       <td style="color:#aaa">${Math.round(c.costTotal).toLocaleString()}</td>
@@ -509,8 +509,8 @@ function render() {
       <td class="p-cell ${pClass}">${c.profit >= 0 ? '+' : ''}${Math.round(c.profit).toLocaleString()}</td>
       <td style="font-size:12px;color:${c.margin > 20 ? '#4ade80' : c.margin > 0 ? '#facc15' : '#f87171'}">${c.margin.toFixed(1)}%</td>
       <td class="td-note"><input type="text" value="${esc(item.note || '')}" onchange="upd(${item.id},'note',this.value)"></td>
-      <td class="link-cell">${item.link ? `<a href="${item.link}" target="_blank">рџ”—</a>` : 'вЂ”'}</td>
-      <td><button class="del-btn" onclick="delItem(${item.id})">вњ•</button></td>
+      <td class="link-cell">${item.link ? `<a href="${item.link}" target="_blank">🔗</a>` : '—'}</td>
+      <td><button class="del-btn" onclick="delItem(${item.id})">✕</button></td>
     `;
     tbody.appendChild(tr);
   });
@@ -536,21 +536,21 @@ function updateSummary(s) {
     totalGoodsCostOnly += c.costTotal;
   });
 
-  // РћР±С‰Р°СЏ РїСЂРёР±С‹Р»СЊ СЃ СѓС‡С‘С‚РѕРј РґРѕСЃС‚Р°РІРєРё Рё РєРѕРјРёСЃСЃРёРё
+  // Общая прибыль с учётом доставки и комиссии
   const profit = totalRevenue - totalGoodsCostOnly - totalDelivery - totalComm;
 
   document.getElementById('totalItems').textContent = totalQty;
-  document.getElementById('totalCNY').textContent = 'ВҐ' + totalCNY.toFixed(1);
-  document.getElementById('totalCNYtg').textContent = Math.round(totalGoodsCost).toLocaleString() + ' в‚ё';
+  document.getElementById('totalCNY').textContent = '¥' + totalCNY.toFixed(1);
+  document.getElementById('totalCNYtg').textContent = Math.round(totalGoodsCost).toLocaleString() + ' ₸';
   const fullCostAll = totalGoodsCostOnly + totalDelivery + totalComm;
   document.getElementById('totalCost').textContent = Math.round(fullCostAll).toLocaleString();
   document.getElementById('totalRevenue').textContent = Math.round(totalRevenue).toLocaleString();
   document.getElementById('totalProfit').textContent = (profit >= 0 ? '+' : '') + Math.round(profit).toLocaleString();
   document.getElementById('totalDelivery').textContent = Math.round(totalDelivery).toLocaleString();
-  document.getElementById('totalWeight').textContent = totalWeight.toFixed(1) + ' РєРі';
+  document.getElementById('totalWeight').textContent = totalWeight.toFixed(1) + ' кг';
 
   const margin = totalRevenue > 0 ? (profit / totalRevenue * 100) : 0;
-  document.getElementById('profitMargin').textContent = margin.toFixed(1) + '% РјР°СЂР¶РёРЅР°Р»СЊРЅРѕСЃС‚СЊ';
+  document.getElementById('profitMargin').textContent = margin.toFixed(1) + '% маржинальность';
 
   const pc = document.getElementById('profitCard');
   if (profit < 0) { pc.className = 'card red'; }
@@ -564,7 +564,7 @@ function updateCatFilter() {
     i.style.split('/').forEach(s => { const t = s.trim().toLowerCase(); if (t) cats.add(t); });
   });
   const container = document.getElementById('catFilter');
-  let html = `<button class="cat-btn ${activeFilter === 'all' ? 'active' : ''}" onclick="setFilter('all')">Р’СЃРµ</button>`;
+  let html = `<button class="cat-btn ${activeFilter === 'all' ? 'active' : ''}" onclick="setFilter('all')">Все</button>`;
   [...cats].sort().forEach(c => {
     html += `<button class="cat-btn ${activeFilter === c ? 'active' : ''}" onclick="setFilter('${c}')">${c.charAt(0).toUpperCase() + c.slice(1)}</button>`;
   });
@@ -603,10 +603,10 @@ function upd(id, field, value) {
 }
 
 function delItem(id) {
-  if (!confirm('РЈРґР°Р»РёС‚СЊ С‚РѕРІР°СЂ?')) return;
+  if (!confirm('Удалить товар?')) return;
   items = items.filter(i => i.id !== id);
   render();
-  toast('РўРѕРІР°СЂ СѓРґР°Р»С‘РЅ');
+  toast('Товар удалён');
 }
 
 function handleImg(event, id) {
@@ -638,14 +638,14 @@ function closeModal() {
 
 function addItem() {
   const name = document.getElementById('newName').value.trim();
-  if (!name) { toast('Р’РІРµРґРёС‚Рµ РЅР°Р·РІР°РЅРёРµ С‚РѕРІР°СЂР°', true); return; }
+  if (!name) { toast('Введите название товара', true); return; }
   const price = parseFloat(document.getElementById('newPrice').value);
-  if (!price || price <= 0) { toast('Р’РІРµРґРёС‚Рµ С†РµРЅСѓ РІ СЋР°РЅСЏС…', true); return; }
+  if (!price || price <= 0) { toast('Введите цену в юанях', true); return; }
 
   items.push({
     id: nextId++,
     name,
-    style: document.getElementById('newStyle').value.trim() || 'Р‘РµР· РєР°С‚РµРіРѕСЂРёРё',
+    style: document.getElementById('newStyle').value.trim() || 'Без категории',
     price,
     qty: parseInt(document.getElementById('newQty').value) || 1,
     weight: document.getElementById('newWeight').value ? parseFloat(document.getElementById('newWeight').value) : null,
@@ -656,10 +656,10 @@ function addItem() {
   });
   closeModal();
   render();
-  toast('РўРѕРІР°СЂ РґРѕР±Р°РІР»РµРЅ');
+  toast('Товар добавлен');
 }
 
-// ===================== РРњРџРћР Рў =====================
+// ===================== ИМПОРТ =====================
 function handleImport(event) {
   const file = event.target.files[0];
   if (!file) return;
@@ -673,8 +673,8 @@ function handleImport(event) {
         if (Array.isArray(data)) {
           data.forEach(d => {
             items.push({
-              id: nextId++, name: d.name || 'Р‘РµР· РЅР°Р·РІР°РЅРёСЏ',
-              style: d.style || d.category || 'Р‘РµР· РєР°С‚РµРіРѕСЂРёРё',
+              id: nextId++, name: d.name || 'Без названия',
+              style: d.style || d.category || 'Без категории',
               price: parseFloat(d.price || d.priceCNY || 0),
               qty: parseInt(d.qty || d.quantity || 1),
               weight: d.weight || null,
@@ -685,9 +685,9 @@ function handleImport(event) {
             });
           });
           render();
-          toast(`РРјРїРѕСЂС‚РёСЂРѕРІР°РЅРѕ ${data.length} С‚РѕРІР°СЂРѕРІ`);
+          toast(`Импортировано ${data.length} товаров`);
         }
-      } catch(e) { toast('РћС€РёР±РєР° РїР°СЂСЃРёРЅРіР° JSON', true); }
+      } catch(e) { toast('Ошибка парсинга JSON', true); }
     };
     reader.readAsText(file);
     return;
@@ -698,49 +698,49 @@ function handleImport(event) {
     reader.onload = e => {
       try {
         const lines = e.target.result.split('\n').filter(l => l.trim());
-        if (lines.length < 2) { toast('CSV РїСѓСЃС‚', true); return; }
+        if (lines.length < 2) { toast('CSV пуст', true); return; }
         const headers = lines[0].split(',').map(h => h.trim().toLowerCase().replace(/"/g, ''));
-        const idx = { n: headers.findIndex(h => h.includes('РЅР°Р·РІ') || h.includes('name')),
-          s: headers.findIndex(h => h.includes('РєР°С‚РµРі') || h.includes('СЃС‚РёР»СЊ') || h.includes('style') || h.includes('categor')),
-          p: headers.findIndex(h => h.includes('С†РµРЅ') || h.includes('price') || h.includes('cny')),
-          q: headers.findIndex(h => h.includes('РєРѕР»') || h.includes('qty') || h.includes('quant')),
-          w: headers.findIndex(h => h.includes('РІРµСЃ') || h.includes('weight')),
-          sp: headers.findIndex(h => h.includes('РїСЂРѕРґР°Р¶') || h.includes('sell') || h.includes('retail')) };
+        const idx = { n: headers.findIndex(h => h.includes('назв') || h.includes('name')),
+          s: headers.findIndex(h => h.includes('катег') || h.includes('стиль') || h.includes('style') || h.includes('categor')),
+          p: headers.findIndex(h => h.includes('цен') || h.includes('price') || h.includes('cny')),
+          q: headers.findIndex(h => h.includes('кол') || h.includes('qty') || h.includes('quant')),
+          w: headers.findIndex(h => h.includes('вес') || h.includes('weight')),
+          sp: headers.findIndex(h => h.includes('продаж') || h.includes('sell') || h.includes('retail')) };
         let count = 0;
         for (let i = 1; i < lines.length; i++) {
           const vals = lines[i].split(',').map(v => v.trim().replace(/^"|"$/g, ''));
           const name = idx.n >= 0 ? vals[idx.n] : '';
           if (!name) continue;
           items.push({ id: nextId++, name,
-            style: idx.s >= 0 ? vals[idx.s] : 'Р‘РµР· РєР°С‚РµРіРѕСЂРёРё',
+            style: idx.s >= 0 ? vals[idx.s] : 'Без категории',
             price: parseFloat(vals[idx.p]) || 0,
             qty: parseInt(vals[idx.q]) || 1,
             weight: idx.w >= 0 && vals[idx.w] ? parseFloat(vals[idx.w]) : null,
             sellPrice: idx.sp >= 0 && vals[idx.sp] ? parseFloat(vals[idx.sp]) : null,
-            note: '', link: '' });
+            note: '', link: '', image: null });
           count++;
         }
         render();
-        toast(`РРјРїРѕСЂС‚РёСЂРѕРІР°РЅРѕ ${count} С‚РѕРІР°СЂРѕРІ РёР· CSV`);
-      } catch(e) { toast('РћС€РёР±РєР° РїР°СЂСЃРёРЅРіР° CSV', true); }
+        toast(`Импортировано ${count} товаров из CSV`);
+      } catch(e) { toast('Ошибка парсинга CSV', true); }
     };
     reader.readAsText(file);
     return;
   }
 
   if (ext === 'docx') {
-    toast('Р”Р»СЏ РёРјРїРѕСЂС‚Р° DOCX РёСЃРїРѕР»СЊР·СѓР№С‚Рµ РєРЅРѕРїРєСѓ "Р—Р°РіСЂСѓР·РёС‚СЊ РёР· catalog_10" СЃ РїСЂРµРґРІР°СЂРёС‚РµР»СЊРЅРѕ РїРѕРґРіРѕС‚РѕРІР»РµРЅРЅС‹Рј CSV/JSON. DOCX-РїР°СЂСЃРёРЅРі С‚СЂРµР±СѓРµС‚ СЃРµСЂРІРµСЂРЅРѕР№ РѕР±СЂР°Р±РѕС‚РєРё.', true);
-    // РџРѕРєР°Р·С‹РІР°РµРј РёРЅСЃС‚СЂСѓРєС†РёСЋ
+    toast('Для импорта DOCX используйте кнопку "Загрузить из catalog_10" с предварительно подготовленным CSV/JSON. DOCX-парсинг требует серверной обработки.', true);
+    // Показываем инструкцию
     return;
   }
 
-  toast(`Р¤РѕСЂРјР°С‚ .${ext} РїРѕРєР° РЅРµ РїРѕРґРґРµСЂР¶РёРІР°РµС‚СЃСЏ`, true);
+  toast(`Формат .${ext} пока не поддерживается`, true);
 }
 
-// ===================== Р­РљРЎРџРћР Рў =====================
+// ===================== ЭКСПОРТ =====================
 function exportCSV() {
   const s = getSettings();
-  let csv = '"в„–","РќР°Р·РІР°РЅРёРµ","РљР°С‚РµРіРѕСЂРёСЏ","Р¦РµРЅР° (ВҐ)","РљРѕР»-РІРѕ","Р’РµСЃ (РєРі)","Р¦РµРЅР° РїСЂРѕРґР°Р¶Рё (в‚ё)","РЎРµР±РµСЃС‚РѕРёРјРѕСЃС‚СЊ (в‚ё)","РџСЂРёР±С‹Р»СЊ (в‚ё)","РњР°СЂР¶Р° (%)","РџСЂРёРјРµС‡Р°РЅРёРµ","РЎСЃС‹Р»РєР°"\n';
+  let csv = '"№","Название","Категория","Цена (¥)","Кол-во","Вес (кг)","Цена продажи (₸)","Себестоимость (₸)","Прибыль (₸)","Маржа (%)","Примечание","Ссылка"\n';
   items.forEach((item, i) => {
     const c = calcItem(item, s);
     csv += `"${i+1}","${item.name}","${item.style}","${item.price}","${item.qty}","${c.weightKg}","${c.sellPrice}","${Math.round(c.costTotal)}","${Math.round(c.profit)}","${c.margin.toFixed(1)}","${item.note || ''}","${item.link || ''}"\n`;
@@ -750,16 +750,16 @@ function exportCSV() {
   a.href = URL.createObjectURL(blob);
   a.download = 'catalog_export.csv';
   a.click();
-  toast('CSV СЌРєСЃРїРѕСЂС‚РёСЂРѕРІР°РЅ');
+  toast('CSV экспортирован');
 }
 
-// ===================== РЎР‘Р РћРЎ =====================
+// ===================== СБРОС =====================
 function resetData() {
-  if (!confirm('РЎР±СЂРѕСЃРёС‚СЊ РІСЃРµ РґР°РЅРЅС‹Рµ? РўРµРєСѓС‰РёРµ РёР·РјРµРЅРµРЅРёСЏ Р±СѓРґСѓС‚ РїРѕС‚РµСЂСЏРЅС‹.')) return;
+  if (!confirm('Сбросить все данные? Текущие изменения будут потеряны.')) return;
   localStorage.removeItem('catalog_data');
   initData();
   render();
-  toast('Р”Р°РЅРЅС‹Рµ СЃР±СЂРѕС€РµРЅС‹ РґРѕ РёСЃС…РѕРґРЅС‹С…');
+  toast('Данные сброшены до исходных');
 }
 
 // ===================== TOAST =====================
@@ -771,7 +771,7 @@ function toast(msg, isErr) {
   el._t = setTimeout(() => el.classList.remove('show'), 2500);
 }
 
-// ===================== РРќРР¦РРђР›РР—РђР¦РРЇ =====================
+// ===================== ИНИЦИАЛИЗАЦИЯ =====================
 document.getElementById('modalOverlay').addEventListener('click', e => {
   if (e.target === document.getElementById('modalOverlay')) closeModal();
 });
