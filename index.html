@@ -396,26 +396,33 @@ function loadData() {
   return false;
 }
 
+function getDeleted() {
+  try { return JSON.parse(localStorage.getItem('catalog_deleted') || '[]'); } catch(e) { return []; }
+}
+
 function initData() {
   const wasLoaded = loadData();
+  const deleted = getDeleted();
   const prevCount = parseInt(localStorage.getItem('catalog_base_count') || '0');
   if (!wasLoaded) {
-    items = CATALOG_15.map((d, i) => ({
+    items = CATALOG_15.filter(d => !deleted.includes(d.name)).map((d, i) => ({
       id: i + 1, name: d.name, style: d.style, price: d.price,
       qty: d.qty, weight: d.weight, sellPrice: null,
       note: d.note, link: d.link, image: d.image || null
     }));
-    nextId = items.length + 1;
+    nextId = items.length ? Math.max(...items.map(i => i.id)) + 1 : 1;
     saveData();
   } else {
     if (CATALOG_15.length > prevCount) {
       for (let i = prevCount; i < CATALOG_15.length; i++) {
         const d = CATALOG_15[i];
-        items.push({
-          id: nextId++, name: d.name, style: d.style, price: d.price,
-          qty: d.qty, weight: d.weight, sellPrice: null,
-          note: d.note, link: d.link, image: d.image || null
-        });
+        if (!deleted.includes(d.name)) {
+          items.push({
+            id: nextId++, name: d.name, style: d.style, price: d.price,
+            qty: d.qty, weight: d.weight, sellPrice: null,
+            note: d.note, link: d.link, image: d.image || null
+          });
+        }
       }
     }
     items.forEach(item => {
@@ -608,6 +615,12 @@ function upd(id, field, value) {
 
 function delItem(id) {
   if (!confirm('Удалить товар?')) return;
+  const removed = items.find(i => i.id === id);
+  if (removed) {
+    const deleted = JSON.parse(localStorage.getItem('catalog_deleted') || '[]');
+    deleted.push(removed.name);
+    localStorage.setItem('catalog_deleted', JSON.stringify(deleted));
+  }
   items = items.filter(i => i.id !== id);
   render();
   toast('Товар удалён');
