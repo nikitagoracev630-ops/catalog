@@ -371,6 +371,13 @@ let nextId = 1;
 let activeFilter = "all";
 const DATA_VERSION = 2;
 
+function saveData() {
+  try {
+    localStorage.setItem('catalog_data', JSON.stringify(items));
+    localStorage.setItem('catalog_base_count', String(CATALOG_15.length));
+  } catch(e) {}
+}
+
 function loadData() {
   try {
     const ver = parseInt(localStorage.getItem("catalog_ver") || "0");
@@ -389,14 +396,9 @@ function loadData() {
   return false;
 }
 
-function saveData() {
-  try {
-    localStorage.setItem("catalog_data", JSON.stringify(items));
-  } catch(e) {}
-}
-
 function initData() {
   const wasLoaded = loadData();
+  const prevCount = parseInt(localStorage.getItem('catalog_base_count') || '0');
   if (!wasLoaded) {
     items = CATALOG_15.map((d, i) => ({
       id: i + 1, name: d.name, style: d.style, price: d.price,
@@ -406,25 +408,23 @@ function initData() {
     nextId = items.length + 1;
     saveData();
   } else {
-    const existingNames = new Set(items.map(i => i.name));
-    let added = false;
-    CATALOG_15.forEach(d => {
-      if (!existingNames.has(d.name)) {
+    if (CATALOG_15.length > prevCount) {
+      for (let i = prevCount; i < CATALOG_15.length; i++) {
+        const d = CATALOG_15[i];
         items.push({
           id: nextId++, name: d.name, style: d.style, price: d.price,
           qty: d.qty, weight: d.weight, sellPrice: null,
           note: d.note, link: d.link, image: d.image || null
         });
-        added = true;
       }
-    });
+    }
     items.forEach(item => {
       if (!item.image) {
         const src = CATALOG_15.find(d => d.name === item.name && d.image);
         if (src && src.image) item.image = src.image;
       }
     });
-    if (added) saveData();
+    saveData();
   }
 }
 
@@ -761,6 +761,8 @@ function exportCSV() {
 function resetData() {
   if (!confirm('Сбросить все данные? Текущие изменения будут потеряны.')) return;
   localStorage.removeItem('catalog_data');
+  localStorage.removeItem('catalog_base_count');
+  localStorage.removeItem('catalog_settings');
   initData();
   render();
   toast('Данные сброшены до исходных');
