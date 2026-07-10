@@ -765,15 +765,34 @@ function toast(msg, isErr) {
   el._t = setTimeout(() => el.classList.remove('show'), 2500);
 }
 
+// ===================== НАСТРОЙКИ (localStorage) =====================
+const SETTINGS_IDS = ['cnyRate','usdRate','defMarkup','cargoRate','platformComm','defWeight'];
+
+function saveSettings() {
+  const s = {};
+  SETTINGS_IDS.forEach(id => { s[id] = document.getElementById(id).value; });
+  localStorage.setItem('catalog_settings', JSON.stringify(s));
+}
+
+function loadSettings() {
+  try {
+    const saved = JSON.parse(localStorage.getItem('catalog_settings'));
+    if (saved) SETTINGS_IDS.forEach(id => {
+      if (saved[id] != null) document.getElementById(id).value = saved[id];
+    });
+  } catch(e) {}
+}
+
 // ===================== ИНИЦИАЛИЗАЦИЯ =====================
 document.getElementById('modalOverlay').addEventListener('click', e => {
   if (e.target === document.getElementById('modalOverlay')) closeModal();
 });
 
-['cnyRate','usdRate','defMarkup','cargoRate','platformComm','defWeight'].forEach(id => {
-  document.getElementById(id).addEventListener('input', render);
+SETTINGS_IDS.forEach(id => {
+  document.getElementById(id).addEventListener('input', () => { saveSettings(); render(); });
 });
 
+loadSettings();
 initData();
 render();
 </script>
